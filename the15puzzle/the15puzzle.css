@@ -1,0 +1,33 @@
+.playField {
+    width: 50vw;
+    height: 50vw;
+    background: lightgrey;
+    border-radius: 10px;
+    margin: auto;
+    padding: 15px;
+    border: 5px solid grey;
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.cell {
+    width: calc(100% / 4);
+    height: calc(100% / 4);
+    background-color: darkred;
+    display: inline-flex;
+    border-radius: 10px;
+    margin: 0px;
+    border: 2px solid black;
+    box-sizing: border-box;
+    font-size: 5rem;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.refused {
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 50px;
+    color: darkred;
+}

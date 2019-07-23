@@ -1,30 +1,212 @@
-function myCalc() {
-    
-    let again = true;
-    
-    while( again === true){
-        let x,y,oper,result;
-        x=prompt("Введите первое числое", '');
-        oper=prompt("Введите операцию ' + ' либо ' - ' либо ' * ' либо ' / ' ", '');
-        y=prompt("Введите второе число", '');
+const films = [
+    {
+        title: 'The Green Mile',
+        creationYear: 1999,
+        country: ['USA'],
+        budget: '$60 000 000',
+        actors: [
+            {
+                name: 'Tom Hanks',
+                age: 63,
+                role: 'Paul Edgecomb',
+            },
+            {
+                name: 'David Morse',
+                age: 65,
+                role: 'Brutus Howell',
+            },
+            {
+                name: 'Michael Clarke Duncan',
+                age: 54,
+                role: 'John Coffey',
+            },
+        ],
+        director: {
+            name: 'Frank Darabont',
+            age: 60,
+            oscarsCount: 0,
+        }
+    },
+    {
+        title: 'Inception',
+        creationYear: 2010,
+        country: ['USA'],
+        budget: '$160 000 000',
+        actors: [
+            {
+                name: 'Leonardo DiCaprio',
+                age: 44,
+                role: 'Cobb',
+            },
+            {
+                name: 'Joseph Gordon-Levitt',
+                age: 38,
+                role: 'Arthur',
+            },
+            {
+                name: 'Ellen Page',
+                age: 32,
+                role: 'Ariadne',
+            },
+            {
+                name: 'Tom Hardy',
+                age: 41,
+                role: 'Eames',
+            },
+        ],
+        director: {
+            name: 'Christopher Nolan',
+            age: 48,
+            oscarsCount: 0,
+        }
+    },
+    {
+        title: 'Forrest Gump',
+        creationYear: 1994,
+        country: ['USA'],
+        budget: '$55 000 000',
+        actors: [
+            {
+                name: 'Tom Hanks',
+                age: 63,
+                role: 'Forrest Gump',
+            },
+            {
+                name: 'Robin Wright',
+                age: 53,
+                role: 'Jenny Curran',
+            },
+            {
+                name: 'Sally Field',
+                age: 72,
+                role: 'Mrs. Gump',
+            },
+        ],
+        director: {
+            name: 'Robert Zemeckis',
+            age: 68,
+            oscarsCount: 1,
+        }
+    },
+    {
+        title: 'Interstellar',
+        creationYear: 2014,
+        budget: '$165 000 000',
+        country: ['USA','Great Britain', 'Canada'],
+        actors: [
+            {
+                name: 'Matthew McConaughey',
+                age: 49,
+                role: 'Cooper',
+            },
+            {
+                name: 'Anne Hathaway',
+                age: 36,
+                role: 'Brand',
+            },
+            {
+                name: 'Jessica Chastain',
+                age: 42,
+                role: 'Murph',
+            },
+            {
+                name: 'Michael Caine',
+                age: 86,
+                role: 'Professor Brand',
+            },
+            {
+                name: 'Matt Damon',
+                age: 48,
+                role: 'Mann',
+            },
+        ],
+        director: {
+            name: 'Christopher Nolan',
+            age: 48,
+            oscarsCount: 0,
+        }
+    },
+    {
+        title: 'Catch Me If You Can',
+        creationYear: 2002,
+        budget: '$52 000 000',
+        country: ['USA', 'Canada'],
+        actors: [
+            {
+                name: 'Tom Hanks',
+                age: 63,
+                role: 'Carl Hanratty',
+            },
+            {
+                name: 'Leonardo DiCaprio',
+                age: 36,
+                role: 'Frank Abagnale Jr.',
+            },
+            {
+                name: 'Christopher Walken',
+                age: 76,
+                role: 'Frank Abagnale',
+            },
+            {
+                name: 'Amy Adams',
+                age: 44,
+                role: 'Brenda Strong',
+            },
+        ],
+        director: {
+            name: 'Steven Spielberg',
+            age: 72,
+            oscarsCount: 4,
+        }
+    },
+];
 
-        if (oper==="+"){
-            result=Number(x)+Number(y);
-        }
-        else if (oper==="-"){
-            result=Number(x)-Number(y);
-        }
-        else if (oper==="*"){
-            result=Number(x)*Number(y);
-        }
-        else if (oper==="/"){
-        result=Number(x)/Number(y);
-        }
-        
-        alert ('Результат :' + ' ' + result);
+// 1.средний возраст актеров
+let averageAge = 0;                                                                   
+let actorsAmount = 0;
 
-        again = confirm('Посчитать еще?');
+films.forEach( film => {
+    if (film.director.oscarsCount === 0) {
+        averageAge = film.actors.reduce( (age,actor) => {
+            actorsAmount++;
+            return age + actor.age;
+        },averageAge);
     }
-}
+});
 
-myCalc();
+averageAge=Math.round(averageAge/actorsAmount);
+console.log('Средний возраст актеров равен ' + averageAge + ' лет!');
+
+// 2.список актеров
+
+let actors = [];
+let findName = 'Tom Hanks';
+
+films.forEach( film => {  
+  
+    let isFind = film.actors.find(val => {
+        return (val.name === findName)?true:false;
+    });
+  
+    let acts = (actors => {
+        let acts = [];
+        actors.map( val => {
+            if (film.creationYear > 1995 && isFind && findName !== val.name) {
+            acts.push(val.name);
+            }
+        });
+        return acts;
+    })(film.actors);
+  
+    actors = actors.concat(acts);
+
+    
+});
+actors = actors.join(', ');
+
+console.log('Список актеров: ', actors);
+
+// 3. Бюджет фильмов
+
+let sum = 0;
+
