@@ -27,6 +27,11 @@
     color: wheat;
     box-shadow: 5px 5px 15px black;
     user-select: none;
+    cursor: grab;
+}
+
+.cell:active {
+    cursor: grabbing;
 }
 
 .refused {
