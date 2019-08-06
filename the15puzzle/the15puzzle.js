@@ -1,5 +1,4 @@
 const isStart = confirm('Wanna begin new game?');
-// const body = document.getElementsByTagName('body');
 
 
 if (isStart === true) {
