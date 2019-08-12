@@ -20,14 +20,20 @@ if (isStart === true) {
             cell.classList.add('cell');
             cell.innerHTML = i + 1;
             cell.id = cell.innerHTML;
-            cell.style.order = cell.id;
+            // cell.style.order = cell.id;
             cellBox.appendChild(cell);
         }
 
-        const newOrder = Array.prototype.slice.call(box.getElementsByTagName('div'));
+        const newOrder = Array.from(box.getElementsByTagName('div'));
         newOrder.sort(()=>Math.random() - 0.5); 
-        // console.log(newOrder);
+        console.log(newOrder);
         
+        cellBox.innerHTML = '';
+        
+        for (let i = 0; i < newOrder.length; i++) {
+            let el = newOrder[i];
+            cellBox.appendChild(el);
+        }
     }
 
     createCell();
