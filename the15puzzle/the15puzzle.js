@@ -9,7 +9,6 @@ if (isStart === true) {
     document.body.appendChild(box);
     emptyCell = document.createElement('div');
     emptyCell.classList.add('emptyCell');
-    // emptyCell.style.order = 16;
     box.appendChild(emptyCell);
 
     let createCell = () => {
@@ -20,7 +19,7 @@ if (isStart === true) {
             cell.classList.add('cell');
             cell.innerHTML = i + 1;
             cell.id = cell.innerHTML;
-            // cell.style.order = cell.id;
+            cell.style.order = cell.id;
             cellBox.appendChild(cell);
         }
 
@@ -32,11 +31,37 @@ if (isStart === true) {
         
         for (let i = 0; i < newOrder.length; i++) {
             let el = newOrder[i];
+            el.style.order = i + 1;
             cellBox.appendChild(el);
         }
     }
 
     createCell();
+
+    let newOrderValue = Number(window.getComputedStyle(emptyCell).order);
+    let leftCellValue = Number(window.getComputedStyle(emptyCell.previousSibling).order);   
+    let rightCellValue = Number(window.getComputedStyle(emptyCell.nextSibling).order);
+    // let bottomCellValue = Number(window.getComputedStyle(emptyCell).order) + Number(4);
+    // let topCellValue = Number(window.getComputedStyle(emptyCell).order) - Number(4);
+    // console.log('topCellValue - ' + topCellValue);
+    // console.log('leftCellValue - ' + leftCellValue);
+    // console.log('rightCellValue - ' + rightCellValue);
+    // console.log('bottomCellValue - ' + bottomCellValue);
+
+    console.log('emptyCell - ' + newOrderValue);
+
+
+    cell = document.querySelector('.cell');
+
+    let currentCell = cell.addEventListener('click', e => {
+        prevOrderVal = e.target.style.order;
+        console.log(prevOrderVal);
+        console.log(newOrderValue);
+        emptyCell.style.order = prevOrderVal;
+        cell.style.order = newOrderValue;
+    });
+
+    currentCell();
 
 } else {
     console.log('You refused :(');
